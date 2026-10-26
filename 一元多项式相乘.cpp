@@ -7,45 +7,7 @@ typedef struct node{
 }NODE;
 
 void multiplication(NODE *head1, NODE *head2, NODE *head3){
-	NODE *p = head1->next, *q;
-	while(p!=NULL){
-		q = head2->next;
-		while(q!=NULL){
-			NODE *r = head3->next;
-			while(r!=NULL && r->exp != p->exp + q->exp) r = r->next;
-			if(r!=NULL){
-				r->coef += p->coef * q->coef;
-			}else{
-				NODE *s = (NODE*)malloc(sizeof(NODE));
-				s->coef = p->coef * q->coef;//create a new node
-				s->exp = p->exp + q->exp;
-				NODE *k = head3;//locate the position to insert
-				while(k->next!=NULL && k->next->exp < s->exp) k = k->next;
-				s->next = k->next;//insert
-				k->next = s;
-			}
-			q = q->next;
-		}
-		p = p->next;
-	}
-	NODE *d = head3->next, *dPrior = head3;//delete the node whose coef is 0
-	while(d!=NULL){
-		if(d->coef==0){
-			dPrior->next = d->next;
-			free(d);
-			d = dPrior->next;
-		}else{
-			d = d->next;
-			dPrior = dPrior->next;
-		}
-	}
-	if(head3->next == NULL){
-		NODE *zero = (NODE*)malloc(sizeof(NODE));
-		zero->coef = 0;
-		zero->exp = 0;
-		zero->next = NULL;
-		head3->next = zero;
-	}
+	
 }
 
 void input(NODE *head){
